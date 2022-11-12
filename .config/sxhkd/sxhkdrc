@@ -1,0 +1,152 @@
+
+# WM INDEPENDENT KEYBINDINGS
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+
+# BSPWM HOTKEYS
+
+# quit/restart bspwm
+super + shift + q
+	bspc quit
+
+super + ctrl + q
+    bspc wm -r
+
+# close and kill
+super + q
+	bspc node -c
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest
+
+
+# STATE/FLAGS
+
+# set the window state
+super + {t,shift + t,f,shift + f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,z}
+	bspc node -g {marked,locked,private}
+
+# sticky
+super + s
+        bspc node -g sticky
+
+
+# FOCUS/SWAP
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+super + {_,shift + }n
+	bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} focused:'^{1-9,10}'
+
+# APPLICATION KEYBINDINGS
+super + Return
+	st
+super + e
+    st -e ranger
+super + shift + m
+    st -r ncmpcpp
+super + shift + n
+    st -e nvim
+super + ctrl + e
+    pcmanfm
+super + w
+    brave
+super + shift + w
+    firefox
+super + space
+    dmenu_run -p Run:
+super + ctrl + v
+    pavucontrol
+super + shift + e
+    st -e htop
+super + shift + x
+    power
+super + n
+    nitrogen
+super + shift + s
+    scrot -s
+super + shift + u
+        emojis
+super + y
+        minitube
+super + m
+        mailspring
+super + i
+        transmission-gtk
+
+#Multimedia and brightness
+XF86AudioRaiseVolume
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
+XF86AudioLowerVolume
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+XF86MonBrightnessUp
+    xbacklight -inc 10%
+XF86MonBrightnessDown
+    xbacklight -dec 10%
+Print
+    scrot -s '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv ~/Screenshots'
+XF86HomePage
+    chromium
+XF86AudioPrev
+    mpc prev
+XF86AudioNext
+    mpc next
+XF86AudioPlay
+    mpc toggle
+alt + Up
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
+alt + Down
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+alt + shift + Left
+    mpc prev
+alt + shift + Right
+    mpc next
+alt + shift + space
+    mpc toggle
+alt + Left
+    mpc seek -10
+alt + Right
+    mpc seek +10

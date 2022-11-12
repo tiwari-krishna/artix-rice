@@ -1,0 +1,58 @@
+[Music]
+command=stat-music
+interval=5
+signal=1
+color=#db6edb
+
+[Sep]
+command=echo "  "
+
+[Battery]
+command=stat-battery
+interval=5
+color=#e7f26f
+
+[Sep]
+command=echo "  "
+
+[Weather]
+command=stat-weather
+interval=720
+color=#e09090
+
+[Sep]
+command=echo "  "
+
+[Wifi]
+command=stat-wifi
+interval=5
+color=#e681df
+
+[Sep]
+command=echo "  "
+
+[Volume]
+command=stat-volume
+interval=once
+signal=2
+color=#85e67c
+
+[Sep]
+command=echo "  "
+
+[Brightness]
+command=stat-backlight
+interval=once
+signal=3
+color=#e67c93
+
+[Sep]
+command=echo "  "
+
+[Date & time]
+command=stat-timedate
+interval=60
+color=#9698ff
+
+[Sep]
+command=echo "  "

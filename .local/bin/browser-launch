@@ -1,0 +1,11 @@
+#!/bin/sh
+
+brows=$(printf Qutebrowser\\nFirefox\\nChromium\\nBrave | dmenu -p "Select your Browser:")
+
+case "$brows" in
+        Qutebrowser) qutebrowser & exit 0;;
+        Firefox) firefox & exit 0;;
+        Chromium) chromium & exit 0;;
+        Brave) brave || brave-browser & exit 0;;
+        *) notify-send "Sorry .." "Browser Not available" & exit 0;;
+esac

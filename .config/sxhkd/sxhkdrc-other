@@ -1,0 +1,91 @@
+# APPLICATION KEYBINDINGS
+super + Return
+	st
+super + a
+    st -e ranger
+super + shift + n
+    st -e vim
+#super + shift + m
+#    st -e ncmpcpp
+super + ctrl + e
+    pcmanfm
+super + w
+    $BROWSER
+super + shift + w
+    set-wallpaper
+super + space
+    dmenu_run -p Run:
+super + ctrl + v
+    pavucontrol
+super + shift + e
+    st -e gotop
+super + BackSpace
+    power
+super + n
+    newsboat
+alt + shift + s
+    maim -s ~/Data/screenshots/$(date +%Y-%m-%d-%s).png
+alt + s
+    maim ~/Data/screenshots/$(date +%Y-%m-%d-%s).png
+super + Menu
+        rofi -show emoji
+super + y
+        minitube
+super + m
+        neomutt
+super + i
+        qbittorrent
+alt + r
+        radio-listen
+super + e
+        emacsclient -c
+super + c
+        galculator
+super + control + x
+        slock
+super + grave
+        alacritty
+
+#Multimedia and brightness
+XF86AudioRaiseVolume
+    pamixer --allow-boost -i 3
+XF86AudioLowerVolume
+    pamixer --allow-boost -d 3
+XF86AudioMute
+    pamixer -t
+XF86MonBrightnessUp
+    xbacklight -inc 5%
+XF86MonBrightnessDown
+    xbacklight -dec 5%
+shift + Print
+    maim -s ~/Data/screenshots/$(date +%Y-%m-%d-%s).png
+Print
+    maim ~/Data/screenshots/$(date +%Y-%m-%d-%s).png
+XF86HomePage
+    $BROWSER
+XF86AudioPrev
+    mpc prev
+XF86AudioNext
+    mpc next
+XF86AudioPlay
+    mpc toggle
+alt + Up
+    pamixer --allow-boost -i 3
+alt + Down
+    pamixer --allow-boost -d 3
+alt + shift + Left
+    mpc prev
+alt + shift + Right
+    mpc next
+alt + control + space
+    mpc single
+alt + shift + space
+    mpc toggle
+alt + shift + Left
+    mpc seek -60
+alt + Left
+    mpc seek -10
+alt + Right
+    mpc seek +10
+alt + shift + Right
+    mpc seek +60

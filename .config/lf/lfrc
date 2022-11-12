@@ -1,0 +1,150 @@
+#Krishna Config of lf
+set shell zsh
+set hidden true
+set ignorecase true
+set icons true
+set drawbox true
+#set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+
+##  Functions
+#Make directory
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+# Make a new file
+cmd mkfile ${{
+  printf "File Name: "
+  read name
+  $EDITOR $name
+}}
+
+#Rename the file
+cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+
+# set wallpaper
+cmd setwallpaper %cp "$f" ~/.cache/wall && xwallpaper --zoom "$f"
+
+# compile and install suckless utils
+cmd mkins %exec sudo make clean install
+
+# Send file to trash folder
+# making sure trash folder is present
+%mkdir -p ~/.cache/trash
+cmd trash %set -f; mv $fx ~/.cache/trash
+
+# Delete
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    printf "delete?[y/n]"
+    read ans
+    [ $ans = "y" ] && rm -rf $fx && clear
+}}
+
+# Extract different archiving formats
+# Got idea from Arcolinux's bashrc
+cmd ext ${{
+      case $f in
+         *.tar.bz2)   tar xjf $f   ;;
+         *.tar.gz)    tar xzf $f   ;;
+         *.bz2)       bunzip2 $f   ;;
+         *.rar)       unrar x $f   ;;
+         *.gz)        gunzip $f    ;;
+         *.tar)       tar xf $f    ;;
+         *.tbz2)      tar xjf $f   ;;
+         *.tgz)       tar xzf $f   ;;
+         *.zip)       unzip $f     ;;
+         *.Z)         uncompress $f;;
+         *.7z)        7z x $f      ;;
+         *.deb)       ar x $f      ;;
+         *.tar.xz)    tar xf $f    ;;
+         *.tar.zst)   unzstd $f    ;;
+         *)           echo "'$f' cannot be extracted via ex()" ;;
+      esac ; clear
+     #   else
+     # echo "'$f' is not a valid file"
+}}
+
+# define a custom 'open' command
+# This command is called when current file is not a directory. You may want to
+# use either file extensions and/or mime types here. Below uses an editor for
+# text files and a file opener for the rest.
+cmd open ${{
+    test -L $f && f=$(readlink -f $f)
+    case $(file --mime-type $f -b) in
+        text/*) $EDITOR $fx;;
+        image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) setsid -f zathura $fx >/dev/null 2>&1 ;;
+        application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+        audio/*) mpv --audio-display=no $f ;;
+        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
+# compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with tar and gunzip
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+
+#Moveto destination
+cmd moveto ${{
+	set -f
+	clear; printf "Move to where?\\n"
+	read dest
+    mv -iv $fx $dest
+}}
+
+#copy to destination
+cmd copyto ${{
+	set -f
+	clear; printf "Copy to where?\\n"
+    read dest
+    cp -ivr $fx $dest
+}}
+
+# Keymap
+map P moveto
+map O copyto
+map R push :rename<space>
+map Dd trash
+map md mkdir
+map mf mkfile
+map DD delete
+map m
+map C copy
+map X cut
+map V paste
+map <c-r> reload
+map z clear
+map g top
+map G bottom
+map <c-space> unselect
+map au ext
+map S shell
+map <enter> open
+map bg setwallpaper
+
+# execute current file (must be executable)
+#map x $$f
+#map X !$f
+
+# dedicated keys for file opener actions
+#map o &mimeopen $f
+#map O $mimeopen --ask $f

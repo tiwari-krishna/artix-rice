@@ -1,0 +1,5 @@
+#!/bin/sh
+
+light="$(xbacklight | awk '{ print int($1) }')"
+
+echo "💡 $light"

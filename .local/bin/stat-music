@@ -1,0 +1,12 @@
+#!/bin/sh
+stat="$(mpc | awk 'FNR == 2 {print $1}')"
+
+if [ "$stat" = "[paused]" ]; then
+        out="⏸️ "
+elif [ "$stat" = "[playing]" ]; then
+        out="⏯ $(mpc current -f "%title% %artist% %file%" | cut -c-20)"
+else
+        out="⏹️ "
+fi
+
+echo $out

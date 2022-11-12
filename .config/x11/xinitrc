@@ -1,0 +1,12 @@
+#!/bin/sh
+xwallpaper --stretch $HOME/.cache/wall &
+xcompmgr &
+#dunst &
+#emacs --daemon &
+#xrdb $XRESOURCES &
+xclip &
+mpd &
+xrdb -load ~/.config/x11/xresources &
+xmodmap ~/.config/x11/xmodmap &
+xmodmap -e 'clear Lock' &
+exec dwm
