@@ -36,7 +36,7 @@ import qualified Data.Map        as M
 import Data.Ratio ((%))
 
 -- Setting Terminal and Browser
-myTerminal      = "alacritty"
+myTerminal      = "$TERMINAL"
 myBrowser       = "$BROWSER"
 
 -- Whether focus follows the mouse pointer.
@@ -117,6 +117,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,       xK_q     ), kill)
     , ((modm,               xK_Tab ), sendMessage NextLayout)
     , ((modm, xK_t ), setLayout $ XMonad.layoutHook conf)
+    , ((modm .|. shiftMask, xK_t), sendMessage $ JumpToLayout "Mirror Tall")
+    , ((modm .|. controlMask, xK_t), sendMessage $ JumpToLayout "tabbed")
     , ((modm,               xK_n     ), refresh)
     , ((modm,               xK_j     ), windows W.focusDown)
     , ((modm,               xK_k     ), windows W.focusUp  )
@@ -169,7 +171,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_apostrophe ), spawn "notify-battery")
     , ((modm .|. controlMask, xK_apostrophe  ), spawn "notify-wifi")
 
-    -- Additional Keybindings (Apps specific)
+    -- Additional Keybindings (User Space Programs)
     , ((mod1Mask .|. shiftMask, xK_space  ), spawn "mpc toggle")
     , ((mod1Mask .|. shiftMask, xK_Left  ), spawn "mpc prev")
     , ((mod1Mask .|. shiftMask, xK_Right  ), spawn "mpc next")
@@ -198,6 +200,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((mod1Mask .|. modm, xK_minus  ), spawn "xbacklight -dec 5")
     , ((0, xF86XK_MonBrightnessDown  ), spawn "xbacklight -dec 5")
     , ((0, xF86XK_HomePage  ), spawn (myBrowser))
+    , ((mod1Mask , xK_F1  ), spawn "playerctl play-pause")
+    , ((mod1Mask , xK_F2  ), spawn "playerctl pervious")
+    , ((mod1Mask , xK_F3  ), spawn "playerctl next")
+    , ((mod1Mask , xK_equal  ), spawn "playerctl volume 5+")
+    , ((mod1Mask , xK_minus  ), spawn "playerctl volume 5-")
+    , ((mod1Mask .|. shiftMask , xK_equal  ), spawn "playerctl position 30+")
+    , ((mod1Mask .|. shiftMask , xK_minus  ), spawn "playerctl position 30-")
 
     , ((mod1Mask .|. controlMask, xK_v  ), spawn (myTerminal ++ " -e pulsemixer"))
     , ((modm,                     xK_a  ), spawn (myTerminal ++ " -e ranger"))
@@ -212,6 +221,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_grave     ), spawn "libreoffice")
     , ((modm .|. shiftMask, xK_d        ), spawn "rofi -show drun")
     , ((modm .|. shiftMask, xK_w        ), spawn "open-bookmarks")
+    , ((modm, xK_semicolon        ), spawn "spellchk")
     , ((modm .|. shiftMask, xK_x     ), spawn "pcmanfm")
     , ((modm .|. controlMask, xK_r     ), spawn "mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam /dev/video0")
     , ((modm,           xK_slash ), spawn "web-search")
