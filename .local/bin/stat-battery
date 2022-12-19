@@ -12,4 +12,10 @@ case "$stat" in
 		*) exit 1 ;;
 	esac
 
-echo "🔋 $icon $Capacity%"
+echo "    $icon $Capacity%"
+
+case $BLOCK_BUTTON in
+    1) notify-send "Battery Status" " $stat at $Capacity%";;
+    4) xbacklight -inc 3;;
+    5) xbacklight -dec 3;;
+esac

@@ -30,10 +30,10 @@ theme.border_normal = "#000000"
 theme.border_focus  = "#ffffff"
 theme.border_marked = "#ff0004"
 
-theme.tasklist_disable_icon = true
+theme.tasklist_disable_icon = false
 theme.tasklist_font = "Noto Sans Bold 10"
 
-theme.taglist_font = "Noto Sans Bold 10"
+theme.taglist_font = "Noto Sans Mono Bold 10"
 
 -- There are other variable sets
 -- overriding the default one when

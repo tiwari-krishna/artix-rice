@@ -1,0 +1,18 @@
+#!/bin/sh
+
+conf="$(printf DWM\\nAlacritty\\nDmenu\\nQtile\\nST\\nAwesomeWM\\nI3\\nXMonad\\nNeoVim\\nBashrc\\nBashProf | dmenu -p "What to edit?")"
+
+case $conf in
+	DWM) $TERMINAL -e nvim $HOME/.config/dwm ;;
+    Alacritty) $TERMINAL -e nvim $HOME/.config/alacritty/alacritty.yml;;
+    Dmenu) $TERMINAL -e nvim $HOME/.config/dmenu;;
+    Qtile) $TERMINAL -e nvim $HOME/.config/qtile/config.py;;
+    ST) $TERMINAL -e nvim $HOME/.config/st/;;
+    AwesomeWM) $TERMINAL -e nvim $HOME/.config/awesome/rc.lua;;
+    I3) $TERMINAL -e nvim $HOME/.config/i3/config;;
+    XMonad) $TERMINAL -e nvim $HOME/.config/xmonad;;
+    Bashrc) $TERMINAL -e nvim $HOME/.bashrc;;
+    NeoVim) $TERMINAL -e nvim $HOME/.config/nvim/init.vim;;
+    BashProf) $TERMINAL -e nvim $HOME/.bash_profile;;
+    *) notify-send "Sorry" "Config not in scope";;
+esac

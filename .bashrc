@@ -50,7 +50,7 @@ alias aptrm='sudo apt remove '
 alias rm='rm -i'
 alias xbins='sudo xbps-install'
 alias xbrm='sudo xbps-remove'
+alias dnf='sudo dnf'
 alias q='exit'
-alias set-wall='sxiv -q -o -t -r ~/Data/Media/wallpapers'
 
 export PS1="\[\e[31m\][\[\e[m\]\[\e[38;5;172m\]\u\[\e[m\]@\[\e[38;5;153m\]\h\[\e[m\] \[\e[38;5;214m\]\W\[\e[m\]\[\e[31m\]]\[\e[m\]\\$ "

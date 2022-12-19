@@ -9,8 +9,8 @@ smart_borders on
 
 set $mod Mod4
 set $mod1 Mod1
-set $Browser firefox
-set $terminal st
+set $Browser $BROWSER
+set $terminal $TERMINAL
 floating_modifier $mod
 
 bindsym $mod+plus  gaps inner all plus 5
@@ -56,7 +56,7 @@ bindsym $mod+Control+x exec --no-startup-id slock
 bindsym $mod+n exec --no-startup-id $terminal -e newsboat
 bindsym $mod+Shift+e exec --no-startup-id $terminal -e htop
 bindsym $mod+w exec --no-startup-id $Browser
-bindsym $mod1+Shift+w exec --no-startup-id set-wallpaper
+bindsym $mod1+Shift+w exec --no-startup-id sxiv -q -o -t -r ~/Data/Media/wallpapers
 bindsym $mod+Control+v exec --no-startup-id pavucontrol
 bindsym $mod+m exec --no-startup-id $terminal -e neomutt
 bindsym $mod+Shift+BackSpace exec power
@@ -72,7 +72,7 @@ bindsym $mod+slash exec web-search
 bindsym $mod+d exec clipgrab
 bindsym $mod+e exec emacsclient -c
 bindsym $mod+c exec galculator
-bindsym $mod+Shift+d exec rofi -show drun
+bindsym $mod+Shift+d exec rofi -show drun -show-icons
 bindsym $mod+grave exec alacritty
 bindsym $mod+Shift+x exec pcmanfm
 
@@ -173,7 +173,7 @@ bar {
   status_command i3blocks
   position top
   height 18
-  font pango:Noto Sans Mono bold 11
+  font pango:Noto Sans semibold 11
   colors {
         background #101012
         statusline #eeeeee

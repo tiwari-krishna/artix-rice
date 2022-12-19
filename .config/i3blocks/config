@@ -15,14 +15,6 @@ color=#e7f26f
 [Sep]
 command=echo "  "
 
-[Weather]
-command=stat-weather
-interval=720
-color=#e09090
-
-[Sep]
-command=echo "  "
-
 [Wifi]
 command=stat-wifi
 interval=5
